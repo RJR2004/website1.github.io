@@ -1,1 +1,1207 @@
+<!doctype html>
+<html lang="et" data-lang="et">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Käsitööna laotud kivi- ja plaaditööd tellimusel. Hand-set stone and tile by commission.">
+<title>Master Tiler Website</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400..600&display=swap">
+<style>
+/* Layout: calm limestone hero → pinned canvas where tiles are laid into a mosaic → deep-forest editorial body on a strict 12-col grid with hairline "grout" rules. Single deliberate look (light stone + deep forest bands). */
+:root{
+  --paper:#f5f6f2;      /* limestone, cool, green-biased */
+  --chalk:#e9ece6;
+  --stone:#c6cbc1;
+  --sage:#7b9286;
+  --forest:#1f3a30;
+  --deep:#0e1d17;
+  --ink:#17221d;
+  --muted:#42504a;
+  --grout:#d3d8ce;
+  --line:rgba(23,34,29,.14);
+  --line-dark:rgba(233,236,230,.16);
+  --on-deep:#e9ece6;
+  --on-deep-muted:#c0cbc3;
+  --ph:#2f6b55;
+  --f-display:"Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --f-body:"Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gutter-l:max(20px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(20px, env(safe-area-inset-right, 0px));
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0}
+html{scroll-behavior:auto}
+html.lenis, html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-weight:460;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);font-weight:540;font-optical-sizing:none;font-variation-settings:"opsz" 18;line-height:1.04;letter-spacing:-.01em;text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--f-mono);font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:1280px;margin-inline:auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+:root[data-lang="et"] [data-l="en"], :root[data-lang="en"] [data-l="et"]{display:none!important}
+:focus-visible{outline:2px solid var(--sage);outline-offset:3px}
 
+/* draft placeholders */
+:root.draft .ph{outline:1px dashed var(--ph);outline-offset:3px;border-radius:2px;background:rgba(47,107,85,.07)}
+.on-deep .ph{--ph:#8fc1ab}
+:root.draft .on-deep .ph{background:rgba(143,193,171,.1)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.7em;font:500 15px/1 var(--f-body);letter-spacing:.01em;padding:17px 26px;border-radius:0;border:1px solid var(--forest);background:var(--forest);color:var(--on-deep);text-decoration:none;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.btn:hover{background:var(--deep)}
+.btn .arr{display:inline-block;width:18px;height:1px;background:currentColor;position:relative;transition:width .3s}
+.btn .arr::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
+.btn:hover .arr{width:26px}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+.on-deep .btn{background:var(--on-deep);color:var(--deep);border-color:var(--on-deep)}
+.on-deep .btn:hover{background:#fff}
+.on-deep .btn.ghost{background:transparent;color:var(--on-deep);border-color:var(--line-dark)}
+
+/* header */
+.site-head{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:50;transition:background .4s, box-shadow .4s}
+.site-head.solid{background:rgba(245,246,242,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.head-row{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
+.mark{display:flex;align-items:center;gap:12px;text-decoration:none}
+.mark svg{flex:none}
+.mark b{font:500 13px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase}
+.nav{display:flex;gap:28px;align-items:center}
+.nav a{font-size:14px;text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+.lang{display:flex;border:1px solid var(--line)}
+.lang button{font:500 11px/1 var(--f-mono);letter-spacing:.12em;padding:8px 10px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.head-cta{padding:12px 18px;font-size:14px}
+.nav a.btn{color:var(--on-deep)}
+@media (max-width:980px){.nav .nl{display:none}}
+@media (max-width:600px){.head-cta{display:none}.mark b{font-size:11px;letter-spacing:.14em}}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding-block:120px 80px;overflow:hidden;background:var(--paper)}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:96px 96px;background-position:center center;opacity:.35;-webkit-mask-image:radial-gradient(ellipse at 70% 50%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 70% 50%,#000 0%,transparent 70%)}
+.hero-inner{position:relative;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:center;width:100%}
+.hero h1{font-size:clamp(46px,7.4vw,112px);margin:22px 0 28px}
+.hero h1 em{font-style:italic;color:var(--forest)}
+.hero .lede{max-width:34em;font-size:clamp(17px,1.4vw,19px);color:var(--muted)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+.booking{display:flex;align-items:center;gap:12px;margin-top:30px;font-size:14px;color:var(--muted)}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--sage);box-shadow:0 0 0 0 rgba(123,146,134,.6);animation:pulse 2.4s infinite;flex:none}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(123,146,134,0)}100%{box-shadow:0 0 0 0 rgba(123,146,134,0)}}
+.specimen{position:relative;justify-self:end;width:min(100%,420px)}
+.specimen canvas{display:block;width:100%;aspect-ratio:1/1;height:auto}
+.specimen .sweep{position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.38) 50%,transparent 65%);background-size:300% 100%;background-position:120% 0;animation:sweep 3.6s 1s cubic-bezier(.6,0,.2,1) both;mix-blend-mode:soft-light;pointer-events:none}
+@keyframes sweep{to{background-position:-60% 0}}
+.dim{position:absolute;font:500 11px/1 var(--f-mono);letter-spacing:.08em;color:var(--muted);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.dim.top{top:-30px;left:0;right:0;justify-content:center}
+.dim.top::before,.dim.top::after{content:"";flex:1;height:1px;background:var(--muted);opacity:.5}
+.dim.side{right:-16px;top:0;bottom:0;writing-mode:vertical-rl;transform:translateX(100%);justify-content:center}
+.dim.side::before,.dim.side::after{content:"";flex:1;width:1px;background:var(--muted);opacity:.5}
+.callout{position:absolute;left:-12px;bottom:18%;transform:translateX(-100%);font:500 11px/1.5 var(--f-mono);letter-spacing:.06em;color:var(--ink);text-align:right;white-space:nowrap}
+.callout::after{content:"";position:absolute;right:-56px;top:50%;width:48px;height:1px;background:var(--ink)}
+.scroll-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--muted)}
+.scroll-cue i{display:block;width:1px;height:44px;background:linear-gradient(var(--muted),transparent);animation:cue 2.2s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:860px){
+  .hero-inner{grid-template-columns:1fr;gap:56px}
+  .specimen{justify-self:center;width:min(78%,340px);margin-top:20px}
+  .callout{display:none}
+  .scroll-cue{display:none}
+}
+
+/* assembly */
+#assemble{position:relative;height:100vh;height:100svh;overflow:hidden;background:var(--paper)}
+#mosaic{position:absolute;inset:0;width:100%;height:100%;display:block}
+.as-caption{position:absolute;left:0;right:0;bottom:7%;text-align:center;color:var(--muted);pointer-events:none}
+.as-copy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px;padding-left:var(--gutter-l);padding-right:var(--gutter-r);color:var(--on-deep);pointer-events:none}
+.as-copy h2{font-size:clamp(34px,5.4vw,80px);max-width:13em}
+.as-copy h2 em{font-style:italic;color:#a8c7b8}
+.as-copy p{max-width:32em;color:var(--on-deep-muted);font-size:clamp(16px,1.3vw,18px)}
+.as-copy .eyebrow{color:#8fb3a2}
+.static #assemble{background:var(--deep)}
+.static .as-caption{display:none}
+
+/* sections */
+.band{padding-block:clamp(88px,12vw,168px)}
+.band.deep{background:var(--deep);color:var(--on-deep)}
+.band.deep .eyebrow{color:#8fb3a2}
+.band.forest{background:var(--forest);color:var(--on-deep)}
+.band.chalk{background:var(--chalk)}
+.sec-head{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;align-items:end;margin-bottom:clamp(48px,6vw,88px)}
+.sec-head h2{font-size:clamp(38px,5vw,72px)}
+.sec-head .intro{max-width:36em;color:var(--muted);font-size:18px}
+.deep .sec-head .intro,.forest .sec-head .intro{color:var(--on-deep-muted)}
+@media (max-width:860px){.sec-head{grid-template-columns:1fr;gap:20px}}
+
+/* compare */
+.compare{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-top:1px solid var(--line-dark)}
+.compare .col-h{padding:22px 0 18px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-muted);border-bottom:1px solid var(--line-dark)}
+.compare .col-h.us{color:var(--on-deep)}
+.compare .cell{padding:22px 28px 22px 0;border-bottom:1px solid var(--line-dark);font-size:17px}
+.compare .cell.them{color:var(--on-deep-muted);text-decoration:line-through;text-decoration-color:rgba(169,182,173,.35);text-decoration-thickness:1px}
+.compare .cell.us{font-family:var(--f-display);font-weight:540;font-optical-sizing:none;font-variation-settings:"opsz" 18;font-size:clamp(20px,1.8vw,26px);line-height:1.25}
+.compare > :nth-child(even){padding-left:28px;border-left:1px solid var(--line-dark)}
+@media (max-width:640px){
+  .compare{grid-template-columns:1fr}
+  .compare .col-h.them{display:none}
+  .compare .col-h.us{display:none}
+  .compare > :nth-child(even){padding-left:0;border-left:0}
+  .compare .cell.them{border-bottom:0;padding-bottom:4px;font-size:14px}
+}
+
+/* master */
+.master{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,96px);align-items:start}
+.photo-slot{position:relative;aspect-ratio:4/5;max-width:100%;overflow:hidden;background:var(--forest)}
+.photo-slot canvas{position:absolute;inset:0;width:100%;height:100%}
+.photo-slot .tag{position:absolute;left:16px;bottom:16px;right:16px;color:var(--on-deep);font:500 11px/1.5 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;gap:12px}
+.photo-slot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(14,29,23,.7))}
+.photo-slot .tag{z-index:1}
+.master h2{font-size:clamp(44px,6vw,92px);margin:18px 0 28px}
+.master .body p+p{margin-top:1em}
+.master .body{max-width:36em;color:var(--muted);font-size:18px}
+blockquote{margin:44px 0 0;padding:0 0 0 28px;border-left:1px solid var(--ink);font-family:var(--f-display);font-weight:520;font-optical-sizing:none;font-variation-settings:"opsz" 18;font-style:italic;font-size:clamp(22px,2.2vw,30px);line-height:1.3;color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:52px;border-top:1px solid var(--line)}
+.stats div{padding:22px 16px 0 0}
+.stats b{display:block;font:540 clamp(30px,3.4vw,46px)/1 var(--f-display)}
+.stats span{display:block;margin-top:10px;font-size:13px;color:var(--muted)}
+@media (max-width:860px){.master{grid-template-columns:1fr}.photo-slot{max-width:520px}}
+
+/* method */
+.method-name{font-family:var(--f-display);font-style:italic}
+.stages{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-dark)}
+.stage{display:grid;grid-template-columns:90px minmax(0,4fr) minmax(0,5fr) minmax(0,3fr);gap:32px;padding:34px 0;border-bottom:1px solid var(--line-dark);align-items:baseline}
+.stage .n{font:500 14px/1 var(--f-mono);color:#8fb3a2;letter-spacing:.1em}
+.stage h3{font-size:clamp(26px,2.6vw,38px)}
+.stage p{color:var(--on-deep-muted)}
+.stage .spec{font:500 12px/1.4 var(--f-mono);letter-spacing:.06em;color:var(--on-deep);text-align:right;text-transform:uppercase}
+@media (max-width:860px){
+  .stage{grid-template-columns:48px minmax(0,1fr);gap:10px 16px}
+  .stage p,.stage .spec{grid-column:2}
+  .stage .spec{text-align:left}
+}
+
+/* commissions */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:var(--grout);border:2px solid var(--grout)}
+.card{position:relative;background:var(--paper);display:flex;flex-direction:column;min-width:0}
+.card .swatch{position:relative;aspect-ratio:1/1;overflow:hidden;max-width:100%}
+.card .swatch canvas{position:absolute;inset:0;width:100%;height:100%;transition:transform 1.2s cubic-bezier(.2,.7,.1,1)}
+.card .swatch::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);background-size:300% 100%;background-position:130% 0;transition:background-position 1.1s cubic-bezier(.4,0,.2,1);mix-blend-mode:soft-light}
+.card:hover .swatch::after{background-position:-40% 0}
+.card:hover .swatch canvas{transform:scale(1.04)}
+.card .txt{padding:26px 24px 30px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card h3{font-size:28px}
+.card .en-name{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--sage)}
+.card p{color:var(--muted);font-size:15px}
+@media (max-width:1060px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cards{grid-template-columns:1fr}}
+
+/* projects */
+.projects{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-rows:auto auto;gap:24px}
+.proj{display:flex;flex-direction:column;gap:16px;min-width:0}
+.proj .photo-slot{aspect-ratio:3/2}
+.proj:first-child{grid-row:span 2}
+.proj:first-child .photo-slot{aspect-ratio:4/5}
+.proj h3{font-size:clamp(24px,2.2vw,32px)}
+.proj .meta{color:var(--muted)}
+.proj .cap{color:var(--muted);font-size:15px;max-width:36em}
+@media (max-width:860px){.projects{grid-template-columns:1fr}.proj:first-child{grid-row:auto}.proj:first-child .photo-slot{aspect-ratio:3/2}}
+
+/* fit */
+.fit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2px;background:var(--line);border:1px solid var(--line)}
+.fit > div{background:var(--paper);padding:clamp(28px,4vw,52px)}
+.fit h3{font-size:clamp(28px,2.6vw,38px);margin-bottom:26px}
+.fit ul{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.fit li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;align-items:baseline}
+.fit li::before{content:"";width:12px;height:12px;background:var(--forest);transform:translateY(1px)}
+.fit .no li{color:var(--muted)}
+.fit .no li::before{background:transparent;border:1px solid var(--muted)}
+@media (max-width:760px){.fit{grid-template-columns:1fr}}
+
+/* testimonial */
+.testi{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,10fr);gap:32px;align-items:start}
+.testi .q{font-family:var(--f-display);font-weight:520;font-optical-sizing:none;font-variation-settings:"opsz" 18;font-size:clamp(28px,3.6vw,52px);line-height:1.15}
+.testi cite{display:block;margin-top:28px;font-style:normal}
+@media (max-width:760px){.testi{grid-template-columns:1fr}}
+
+/* process */
+.process{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line)}
+.process li{list-style:none;padding:26px 24px 0 0;display:flex;flex-direction:column;gap:10px}
+.process li + li{padding-left:24px;border-left:1px solid var(--line)}
+.process b{font:500 14px/1 var(--f-mono);color:var(--sage)}
+.process h3{font-size:24px}
+.process p{color:var(--muted);font-size:15px}
+.process ol{display:contents}
+.invest{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2px;margin-top:64px;background:var(--line)}
+.invest > div{background:var(--chalk);padding:clamp(26px,3vw,40px)}
+.invest h3{font-size:28px;margin-bottom:14px}
+.invest p{color:var(--muted)}
+@media (max-width:960px){.process{grid-template-columns:1fr}.process li+li{padding-left:0;border-left:0;border-top:1px solid var(--line)}.process li{padding-bottom:22px}.invest{grid-template-columns:1fr}}
+
+/* guarantee */
+.promises{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--line-dark)}
+.promises div{padding:28px 24px 0 0}
+.promises div + div{padding-left:24px;border-left:1px solid var(--line-dark)}
+.promises b{display:block;font:540 clamp(34px,3.6vw,52px)/1 var(--f-display);margin-bottom:14px}
+.promises span{color:var(--on-deep-muted);font-size:15px}
+@media (max-width:860px){.promises{grid-template-columns:repeat(2,minmax(0,1fr))}.promises div:nth-child(3){padding-left:0;border-left:0}.promises div{padding-bottom:28px}}
+
+/* trade */
+.trade{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:end}
+.trade h2{font-size:clamp(36px,4.6vw,64px)}
+.trade p{color:var(--on-deep-muted);margin-top:22px;max-width:36em;font-size:18px}
+.trade ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-dark)}
+.trade li{padding:14px 0;border-bottom:1px solid var(--line-dark);font-size:15px}
+@media (max-width:860px){.trade{grid-template-columns:1fr}}
+
+/* faq */
+.faq{border-top:1px solid var(--line);max-width:920px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;padding:26px 0;font-family:var(--f-display);font-weight:540;font-optical-sizing:none;font-variation-settings:"opsz" 18;font-size:clamp(21px,2vw,27px);line-height:1.25}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:300 26px/1 var(--f-body);color:var(--sage);transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .a{padding:0 0 28px;color:var(--muted);max-width:44em}
+
+/* form */
+.apply{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,96px);align-items:start}
+.apply-aside h2{font-size:clamp(40px,5vw,72px);margin:18px 0 24px}
+.apply-aside p{color:var(--on-deep-muted);font-size:18px;max-width:30em}
+.apply-aside .assure{margin-top:36px;display:grid;gap:14px;border-top:1px solid var(--line-dark);padding-top:26px}
+.apply-aside .assure div{display:flex;gap:14px;font-size:15px;color:var(--on-deep)}
+.apply-aside .assure div::before{content:"";flex:none;width:10px;height:10px;margin-top:7px;background:#8fb3a2}
+.form{background:var(--paper);color:var(--ink);padding:clamp(24px,3.4vw,48px);min-width:0}
+.progress{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:30px}
+.bar{flex:1;height:2px;background:var(--grout);position:relative}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--forest);transition:width .5s cubic-bezier(.4,0,.2,1)}
+.step{border:0;margin:0;padding:0;min-width:0}
+.step legend{font-family:var(--f-display);font-weight:540;font-size:clamp(26px,2.4vw,34px);line-height:1.15;margin-bottom:8px;padding:0}
+.step .hint{color:var(--muted);font-size:15px;margin-bottom:24px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.opt > span{display:flex;align-items:center;gap:12px;padding:16px 16px;border:1px solid var(--line);font-size:15px;min-height:56px;transition:border-color .2s,background .2s}
+.opt > span::before{content:"";flex:none;width:12px;height:12px;border:1px solid var(--muted)}
+.opt input[type=radio] + span::before{border-radius:50%}
+.opt input:checked + span{border-color:var(--forest);background:rgba(31,58,48,.06)}
+.opt input:checked + span::before{background:var(--forest);border-color:var(--forest)}
+.opt input:focus-visible + span{outline:2px solid var(--sage);outline-offset:2px}
+.opt:hover > span{border-color:var(--ink)}
+.sub-label{display:block;font:500 12px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:26px 0 12px}
+.field{display:grid;gap:8px;margin-bottom:16px}
+.field label{font-size:14px;color:var(--muted)}
+.field input,.field textarea,.field select{font:400 16px/1.4 var(--f-body);color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--stone);padding:10px 0;border-radius:0;width:100%}
+.field textarea{min-height:110px;resize:vertical;border:1px solid var(--stone);padding:12px}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--forest)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 24px}
+.note{margin-top:14px;padding:14px 16px;background:var(--chalk);font-size:14px;color:var(--ink);border-left:2px solid var(--sage)}
+.err{color:#9a3b2c;font-size:14px;margin-top:14px;min-height:1.4em}
+.form-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:26px;flex-wrap:wrap}
+.privacy{font-size:13px;color:var(--muted);margin-top:18px}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--muted);margin-top:8px}
+.consent input{margin-top:4px;accent-color:var(--forest)}
+.done{display:none}
+.form .btn{background:var(--forest);color:var(--on-deep);border-color:var(--forest)}
+.form .btn:hover{background:var(--deep)}
+.form .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.form.sent .steps,.form.sent .progress,.form.sent .form-nav,.form.sent .privacy,.form.sent .err{display:none}
+.form.sent .done{display:block}
+.done h3{font-size:clamp(30px,3vw,42px);margin:16px 0 18px}
+.done p{color:var(--muted)}
+@media (max-width:960px){.apply{grid-template-columns:1fr}}
+@media (max-width:520px){.opts,.two{grid-template-columns:1fr}}
+
+/* footer */
+.foot{background:var(--deep);color:var(--on-deep-muted);padding-block:64px calc(40px + env(safe-area-inset-bottom,0px))}
+.foot-grid{display:grid;grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr));gap:32px;border-top:1px solid var(--line-dark);padding-top:36px}
+.foot b{display:block;color:var(--on-deep);font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.foot .big{font-family:var(--f-display);font-weight:540;font-optical-sizing:none;font-variation-settings:"opsz" 18;font-size:clamp(30px,4vw,54px);color:var(--on-deep);line-height:1.05;margin-bottom:40px;max-width:16em}
+.foot .copyable{user-select:all}
+@media (max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}.foot-grid > :first-child{grid-column:1/-1}}
+
+/* sticky mobile CTA */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--deep);color:var(--on-deep);display:none;align-items:center;justify-content:space-between;gap:12px;padding:12px var(--gutter-r) calc(12px + env(safe-area-inset-bottom,0px)) var(--gutter-l);transform:translateY(110%);transition:transform .4s}
+.sticky.show{transform:none}
+.sticky small{font:500 10px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--on-deep-muted)}
+.sticky .btn{padding:13px 16px;font-size:14px;background:var(--on-deep);color:var(--deep);border-color:var(--on-deep)}
+@media (max-width:760px){.sticky{display:flex}}
+
+/* draft toggle */
+.draft-bar{position:fixed;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;gap:8px;align-items:center;background:var(--paper);border:1px dashed var(--ph);padding:8px 10px;font:500 11px/1.3 var(--f-mono);letter-spacing:.04em;color:var(--ph);max-width:min(340px,calc(100vw - 28px))}
+.draft-bar button{font:inherit;background:var(--ph);color:#fff;border:0;padding:6px 8px;cursor:pointer;flex:none}
+@media (max-width:760px){.draft-bar{bottom:auto;top:calc(80px + env(safe-area-inset-top,0px));padding:6px}.draft-bar > span{display:none}}
+
+/* reveal helper (motion only) */
+.motion .rv{will-change:transform}
+@media (prefers-reduced-motion:reduce){
+  .pulse,.scroll-cue i,.specimen .sweep{animation:none}
+  .card .swatch canvas,.card .swatch::after{transition:none}
+}
+</style>
+</head>
+<body>
+
+
+<header class="site-head" id="head">
+  <div class="wrap head-row">
+    <a class="mark" href="#top" aria-label="Avaleht / Home">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="0.5" y="0.5" width="11.5" height="11.5" fill="#1f3a30"/><rect x="14" y="0.5" width="11.5" height="11.5" fill="none" stroke="#1f3a30"/><rect x="0.5" y="14" width="11.5" height="11.5" fill="none" stroke="#1f3a30"/><rect x="14" y="14" width="11.5" height="11.5" fill="#7b9286"/></svg>
+      <b class="ph" data-cfg="brand">[Ettevõtte nimi]</b>
+    </a>
+    <nav class="nav" aria-label="Peamenüü">
+      <a class="nl" href="#method"><span data-l="et">Meetod</span><span data-l="en">Method</span></a>
+      <a class="nl" href="#commissions"><span data-l="et">Tellimustööd</span><span data-l="en">Commissions</span></a>
+      <a class="nl" href="#work"><span data-l="et">Tööd</span><span data-l="en">Work</span></a>
+      <a class="nl" href="#faq"><span data-l="et">KKK</span><span data-l="en">FAQ</span></a>
+      <div class="lang" role="group" aria-label="Keel / Language">
+        <button type="button" data-set-lang="et" aria-pressed="true">ET</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn head-cta" href="#apply"><span data-l="et">Taotle konsultatsiooni</span><span data-l="en">Apply for a consultation</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero" aria-labelledby="h1">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="wrap hero-inner rv-hero">
+    <div>
+      <p class="eyebrow"><span data-l="et">Käsitööna laotud kivi ja plaat · Eesti</span><span data-l="en">Hand-set stone and tile · Estonia</span></p>
+      <h1 id="h1"><span data-l="et">Pind, mis kestab <em>põlvkondi.</em></span><span data-l="en">Surfaces set to outlast <em>generations.</em></span></h1>
+      <p class="lede">
+        <span data-l="et"><span class="ph" data-cfg="owner">[Meistri nimi]</span> laob iga plaadi ise. Igal aastal võtame vastu piiratud arvu tellimustöid kodudele, arhitektidele ja sisekujundajatele, kelle jaoks on „peaaegu sirge” sama mis kõver.</span>
+        <span data-l="en"><span class="ph" data-cfg="owner">[Master's name]</span> sets every tile himself. Each year we accept a limited number of commissions for homes, architects and interior designers for whom "almost straight" means crooked.</span>
+      </p>
+      <div class="hero-ctas">
+        <a class="btn" href="#apply"><span data-l="et">Taotle konsultatsiooni</span><span data-l="en">Apply for a consultation</span><i class="arr"></i></a>
+        <a class="btn ghost" href="#method"><span data-l="et">Vaata meetodit</span><span data-l="en">See the method</span></a>
+      </div>
+      <p class="booking"><i class="pulse"></i>
+        <span data-l="et">Kalender on tavaliselt täis 2–4 kuud ette. Järgmine vaba aeg: <strong class="ph" data-cfg="next">[kuu aasta]</strong></span>
+        <span data-l="en">The calendar is usually booked 2–4 months ahead. Next opening: <strong class="ph" data-cfg="next">[month year]</strong></span>
+      </p>
+    </div>
+    <div class="specimen" aria-hidden="true">
+      <span class="dim top">600 × 600 MM</span>
+      <span class="dim side"><span data-l="et">VUUK 1,5 MM</span><span data-l="en">JOINT 1.5 MM</span></span>
+      <canvas id="specimen"></canvas>
+      <i class="sweep"></i>
+      <span class="callout"><span data-l="et">KÕRGUSERINEVUS</span><span data-l="en">LIPPAGE</span><br>&lt; 0,3 MM</span>
+    </div>
+  </div>
+  <div class="scroll-cue mono" aria-hidden="true"><span data-l="et">Keri</span><span data-l="en">Scroll</span><i></i></div>
+</section>
+
+<!-- CINEMATIC ASSEMBLY -->
+<section id="assemble" aria-label="Plaatide ladumine / Tiles being set">
+  <canvas id="mosaic" aria-hidden="true"></canvas>
+  <p class="as-caption mono"><span data-l="et">Plaat plaadi haaval · iga vuuk loodis</span><span data-l="en">Tile by tile · every joint in line</span></p>
+  <div class="as-copy on-deep">
+    <p class="eyebrow"><span data-l="et">Üks meister · üks käekiri</span><span data-l="en">One master · one hand</span></p>
+    <h2><span data-l="et">Te ei otsi plaatijat. Te valite <em class="ph" data-cfg="owner">[Meistri nimi]</em>.</span><span data-l="en">You don't hire a tiler. You commission <em class="ph" data-cfg="owner">[Master's name]</em>.</span></h2>
+    <p><span data-l="et">Iga projekti teeb meister isiklikult, ilma alltöövõtjateta. Seepärast on kohti aastas vähe ja kalender täitub kuid ette.</span><span data-l="en">Every project is set by the master personally, with no subcontractors. That is why places are few and the calendar fills months ahead.</span></p>
+  </div>
+</section>
+
+<!-- CATEGORY -->
+<section class="band deep on-deep" aria-labelledby="h-cat">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span data-l="et">Kaks eri asja</span><span data-l="en">Two different things</span></p>
+      <div>
+        <h2 id="h-cat"><span data-l="et">Plaaditöö ja meistritöö ei ole sama teenus.</span><span data-l="en">Tiling and a master commission are not the same service.</span></h2>
+      </div>
+    </div>
+    <div class="compare" role="table" aria-label="Võrdlus / Comparison">
+      <div class="col-h them" role="columnheader"><span data-l="et">Tavaline plaaditöö</span><span data-l="en">Typical tiling</span></div>
+      <div class="col-h us" role="columnheader"><span data-l="et">Meistri tellimustöö</span><span data-l="en">A master commission</span></div>
+      <div class="cell them" role="cell"><span data-l="et">Hind ruutmeetri kohta</span><span data-l="en">Price per square metre</span></div>
+      <div class="cell us" role="cell"><span data-l="et">Investeering, milles lepime kokku pärast aluse ülevaatust</span><span data-l="en">An investment agreed after the substrate survey</span></div>
+      <div class="cell them" role="cell"><span data-l="et">Meeskond ja alltöövõtjad</span><span data-l="en">A crew and subcontractors</span></div>
+      <div class="cell us" role="cell"><span data-l="et">Iga plaadi laob meister ise</span><span data-l="en">Every tile set by the master himself</span></div>
+      <div class="cell them" role="cell"><span data-l="et">Algab esimesest plaadist</span><span data-l="en">Starts with the first tile</span></div>
+      <div class="cell us" role="cell"><span data-l="et">Algab nulljoonest ja lõikekaardist</span><span data-l="en">Starts with a zero line and a cut map</span></div>
+      <div class="cell them" role="cell"><span data-l="et">Kitsad ribad nurkades</span><span data-l="en">Thin slivers in the corners</span></div>
+      <div class="cell us" role="cell"><span data-l="et">Sümmeetrilised lõiked, vuugid jooksevad üle pindade</span><span data-l="en">Symmetrical cuts, joints that run across surfaces</span></div>
+      <div class="cell them" role="cell"><span data-l="et">Garantii paberil</span><span data-l="en">A guarantee on paper</span></div>
+      <div class="cell us" role="cell"><span data-l="et">Kirjalik garantii ja ülevaatus 12 kuu pärast</span><span data-l="en">A written guarantee and a 12-month inspection</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MASTER -->
+<section class="band" aria-labelledby="h-master">
+  <div class="wrap master">
+    <div class="photo-slot" data-pattern="zellige">
+      <canvas aria-hidden="true"></canvas>
+      <span class="tag"><span class="ph"><span data-l="et">Foto: meister töö juures</span><span data-l="en">Photo: the master at work</span></span><span>4:5</span></span>
+    </div>
+    <div>
+      <p class="eyebrow"><span data-l="et">Meister</span><span data-l="en">The master</span></p>
+      <h2 id="h-master" class="ph" data-cfg="owner">[Meistri nimi]</h2>
+      <div class="body">
+        <p data-l="et"><span class="ph" data-cfg="years">[X]</span> aastat kivi ja plaadiga. Arhitektid kutsuvad teda siis, kui projekt ei luba ühtegi viga: suureformaadilised plaadid, looduskivi, mosaiik ja märgruumid, kus vuuk peab jooksma põrandalt seinale ja nišši katkematult.</p>
+        <p data-l="en"><span class="ph" data-cfg="years">[X]</span> years with stone and tile. Architects call him when a project allows no mistakes: large-format tiles, natural stone, mosaic and wet rooms where a joint must run unbroken from floor to wall to niche.</p>
+        <p data-l="et">Ta ei juhi meeskonda kaugelt. Ta on iga päev objektil, lood käes.</p>
+        <p data-l="en">He doesn't run a crew from a distance. He is on site, level in hand, every day.</p>
+      </div>
+      <blockquote class="ph"><span data-l="et">„[Meistri enda sõnad sellest, miks täpsus loeb. Üks või kaks lauset.]”</span><span data-l="en">"[The master's own words on why precision matters. One or two sentences.]"</span></blockquote>
+      <div class="stats">
+        <div><b class="ph" data-cfg="years">[X]</b><span data-l="et">aastat ametis</span><span data-l="en">years in the trade</span></div>
+        <div><b class="ph" data-cfg="projects">[X]</b><span data-l="et">valminud projekti</span><span data-l="en">completed projects</span></div>
+        <div><b class="ph" data-cfg="sqm">[X] m²</b><span data-l="et">laotud pinda</span><span data-l="en">of surface laid</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="band forest on-deep" id="method" aria-labelledby="h-method">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span data-l="et">Meetod</span><span data-l="en">The method</span></p>
+      <div>
+        <h2 id="h-method"><span data-l="et" class="method-name">Nulljoone meetod™</span><span data-l="en" class="method-name">The Zero Line Method™</span></h2>
+        <p class="intro" style="margin-top:20px"><span data-l="et">Plaaditöö õnnestub või ebaõnnestub enne, kui esimene plaat seina jõuab. Meetodil on viis etappi ja me ei jäta ühtegi vahele.</span><span data-l="en">A tiling job succeeds or fails before the first tile reaches the wall. The method has five stages, and none of them is skipped.</span></p>
+      </div>
+    </div>
+    <ol class="stages">
+      <li class="stage"><span class="n">01</span><h3><span data-l="et">Aluse kontroll</span><span data-l="en">Substrate truth</span></h3><p><span data-l="et">Mõõdame niiskuse, tasasuse ja liikumise. Kui alus pole korras, me plaatimisega ei alusta.</span><span data-l="en">We measure moisture, flatness and movement. If the base isn't right, tiling doesn't start.</span></p><span class="spec"><span data-l="et">Tasasus ≤ 2 mm / 2 m</span><span data-l="en">Flatness ≤ 2 mm / 2 m</span></span></li>
+      <li class="stage"><span class="n">02</span><h3><span data-l="et">Paigutusplaan</span><span data-l="en">Layout architecture</span></h3><p><span data-l="et">Lõikekaardi ja nulljoone joonestame enne tööd. Sümmeetria, vuugijooned üle pindade, ühtegi kitsast riba nähtavas kohas.</span><span data-l="en">The cut map and zero line are drawn before work begins. Symmetry, joints aligned across surfaces, no thin strips where they can be seen.</span></p><span class="spec"><span data-l="et">Nähtav lõige ≥ ½ plaati</span><span data-l="en">Visible cut ≥ ½ tile</span></span></li>
+      <li class="stage"><span class="n">03</span><h3><span data-l="et">Materjali valik</span><span data-l="en">Material curation</span></h3><p><span data-l="et">Partii, tooni ja veenid valime koos teiega. Looduskivi laome enne paigaldust kuivalt maha ja nummerdame.</span><span data-l="en">Batch, tone and veining are chosen together. Natural stone is dry-laid and numbered before installation.</span></p><span class="spec"><span data-l="et">Iga plaat nummerdatud</span><span data-l="en">Every slab numbered</span></span></li>
+      <li class="stage"><span class="n">04</span><h3><span data-l="et">Ladumine</span><span data-l="en">Master setting</span></h3><p><span data-l="et">Meister laob ise. Täielik liimikontakt, laseriga kontrollitud tasapind, ühtlane vuuk.</span><span data-l="en">The master sets every tile himself. Full adhesive coverage, laser-checked planes, even joints.</span></p><span class="spec"><span data-l="et">Kõrguserinevus &lt; 0,3 mm</span><span data-l="en">Lippage &lt; 0.3 mm</span></span></li>
+      <li class="stage"><span class="n">05</span><h3><span data-l="et">Üleandmine ja hooldus</span><span data-l="en">Handover and care</span></h3><p><span data-l="et">Hooldusjuhend teie materjalidele, kirjalik garantii ja ülevaatus 12 kuu pärast.</span><span data-l="en">A care guide for your materials, a written guarantee and an inspection after 12 months.</span></p><span class="spec"><span data-l="et">Ülevaatus 12 kuu pärast</span><span data-l="en">12-month inspection</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- SIGNATURE COMMISSIONS -->
+<section class="band chalk" id="commissions" aria-labelledby="h-com">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span data-l="et">Tellimustööd</span><span data-l="en">Signature commissions</span></p>
+      <div>
+        <h2 id="h-com"><span data-l="et">Me ei müü ruutmeetreid.</span><span data-l="en">We don't sell square metres.</span></h2>
+        <p class="intro" style="margin-top:20px"><span data-l="et">Iga töö on nimega tellimus. Töö ulatuses ja investeeringus lepime kokku pärast objekti ülevaatust.</span><span data-l="en">Each piece of work is a named commission. Scope and investment are agreed after the site survey.</span></p>
+      </div>
+    </div>
+    <div class="cards">
+      <article class="card"><div class="swatch" data-pattern="zellige"><canvas aria-hidden="true"></canvas></div><div class="txt"><span class="en-name">The Heirloom Bathroom</span><h3><span data-l="et">Pärandvannituba</span><span data-l="en">Heirloom Bathroom</span></h3><p><span data-l="et">Märgruum, kus vuuk jookseb põrandalt seinale ja nišši katkematult. Hüdroisolatsioon kontrollitud ja dokumenteeritud.</span><span data-l="en">A wet room where the joint runs unbroken from floor to wall to niche. Waterproofing tested and documented.</span></p></div></article>
+      <article class="card"><div class="swatch" data-pattern="chevron"><canvas aria-hidden="true"></canvas></div><div class="txt"><span class="en-name">The Grand Entrance</span><h3><span data-l="et">Suur sissepääs</span><span data-l="en">Grand Entrance</span></h3><p><span data-l="et">Esik, trepid ja koridorid looduskivist või suureformaadilisest plaadist. Esimene asi, mida külaline näeb.</span><span data-l="en">Halls, stairs and corridors in natural stone or large-format tile. The first thing a guest sees.</span></p></div></article>
+      <article class="card"><div class="swatch" data-pattern="bookmatch"><canvas aria-hidden="true"></canvas></div><div class="txt"><span class="en-name">The Bookmatch Wall</span><h3><span data-l="et">Peegelmuster</span><span data-l="en">Bookmatch Wall</span></h3><p><span data-l="et">Marmorplaadid, mille veenid peegelduvad üle vuugi. Üks sein, üks pilt.</span><span data-l="en">Marble slabs whose veins mirror across the joint. One wall, one image.</span></p></div></article>
+      <article class="card"><div class="swatch" data-pattern="hex"><canvas aria-hidden="true"></canvas></div><div class="txt"><span class="en-name">The Mosaic Commission</span><h3><span data-l="et">Mosaiigitellimus</span><span data-l="en">Mosaic Commission</span></h3><p><span data-l="et">Käsitsi laotud mosaiik või zellige. Hooajas võtame neid vastu vaid mõne.</span><span data-l="en">Hand-laid mosaic or zellige. Only a few are accepted each season.</span></p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- SELECTED WORK -->
+<section class="band" id="work" aria-labelledby="h-work">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span data-l="et">Valitud tööd</span><span data-l="en">Selected work</span></p>
+      <h2 id="h-work"><span data-l="et">Detail, mida näeb alles lähedalt.</span><span data-l="en">Detail you only see up close.</span></h2>
+    </div>
+    <div class="projects">
+      <article class="proj">
+        <div class="photo-slot" data-pattern="bookmatch"><canvas aria-hidden="true"></canvas><span class="tag"><span class="ph"><span data-l="et">Projektifoto 1</span><span data-l="en">Project photo 1</span></span><span>4:5</span></span></div>
+        <p class="meta mono ph"><span data-l="et">[Linn] · [m²] · [materjal]</span><span data-l="en">[City] · [m²] · [material]</span></p>
+        <h3 class="ph"><span data-l="et">[Projekti nimi]</span><span data-l="en">[Project name]</span></h3>
+        <p class="cap ph"><span data-l="et">Ülesanne: [mis oli keeruline]. Lahendus: [mida meister tegi]. Arhitekt: [nimi, büroo].</span><span data-l="en">Brief: [what was difficult]. Solution: [what the master did]. Architect: [name, practice].</span></p>
+      </article>
+      <article class="proj">
+        <div class="photo-slot" data-pattern="chevron"><canvas aria-hidden="true"></canvas><span class="tag"><span class="ph"><span data-l="et">Projektifoto 2</span><span data-l="en">Project photo 2</span></span><span>3:2</span></span></div>
+        <p class="meta mono ph"><span data-l="et">[Linn] · [m²] · [materjal]</span><span data-l="en">[City] · [m²] · [material]</span></p>
+        <h3 class="ph"><span data-l="et">[Projekti nimi]</span><span data-l="en">[Project name]</span></h3>
+      </article>
+      <article class="proj">
+        <div class="photo-slot" data-pattern="zellige"><canvas aria-hidden="true"></canvas><span class="tag"><span class="ph"><span data-l="et">Projektifoto 3</span><span data-l="en">Project photo 3</span></span><span>3:2</span></span></div>
+        <p class="meta mono ph"><span data-l="et">[Linn] · [m²] · [materjal]</span><span data-l="en">[City] · [m²] · [material]</span></p>
+        <h3 class="ph"><span data-l="et">[Projekti nimi]</span><span data-l="en">[Project name]</span></h3>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FIT -->
+<section class="band chalk" aria-labelledby="h-fit">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span data-l="et">Kas see sobib teile</span><span data-l="en">Is this right for you</span></p>
+      <h2 id="h-fit"><span data-l="et">Me ei sobi kõigile. See on teadlik valik.</span><span data-l="en">We aren't right for everyone, by design.</span></h2>
+    </div>
+    <div class="fit">
+      <div>
+        <h3><span data-l="et">Sobib, kui</span><span data-l="en">A fit if</span></h3>
+        <ul>
+          <li><span data-l="et">pind peab vastu pidama aastakümneid, mitte ainult üleandmiseni</span><span data-l="en">the surface has to last decades, not just until handover</span></li>
+          <li><span data-l="et">olete arhitekt või sisekujundaja, kelle joonised nõuavad täpsust</span><span data-l="en">you're an architect or designer whose drawings demand precision</span></li>
+          <li><span data-l="et">materjaliks on looduskivi, suureformaadiline plaat, mosaiik või zellige</span><span data-l="en">the material is natural stone, large-format tile, mosaic or zellige</span></li>
+          <li><span data-l="et">planeerite ette ja hindate protsessi</span><span data-l="en">you plan ahead and value the process</span></li>
+        </ul>
+      </div>
+      <div class="no">
+        <h3><span data-l="et">Ei sobi, kui</span><span data-l="en">Not a fit if</span></h3>
+        <ul>
+          <li><span data-l="et">otsite odavaimat hinda ruutmeetri kohta</span><span data-l="en">you're looking for the lowest price per square metre</span></li>
+          <li><span data-l="et">töö peab algama järgmisel nädalal</span><span data-l="en">work has to start next week</span></li>
+          <li><span data-l="et">vaja on väikest parandust või üksikuid plaate</span><span data-l="en">you need a small repair or a few tiles replaced</span></li>
+          <li><span data-l="et">paigutusplaani tegemiseks ei ole aega</span><span data-l="en">there's no time for a layout plan</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="band" aria-label="Soovitus / Testimonial">
+  <div class="wrap testi">
+    <p class="eyebrow"><span data-l="et">Arhitekt</span><span data-l="en">Architect</span></p>
+    <figure style="margin:0">
+      <p class="q ph"><span data-l="et">„[Arhitekti või sisekujundaja tsitaat: mis oli keeruline ja kuidas tulemus välja tuli.]”</span><span data-l="en">"[A quote from an architect or designer: what was difficult and how it turned out.]"</span></p>
+      <cite class="mono ph"><span data-l="et">[Nimi] · [Büroo] · [Projekt]</span><span data-l="en">[Name] · [Practice] · [Project]</span></cite>
+    </figure>
+  </div>
+</section>
+
+<!-- PROCESS + INVESTMENT -->
+<section class="band chalk" aria-labelledby="h-proc">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span data-l="et">Kuidas tellimus algab</span><span data-l="en">How a commission begins</span></p>
+      <h2 id="h-proc"><span data-l="et">Taotlusest valmis pinnani.</span><span data-l="en">From application to finished surface.</span></h2>
+    </div>
+    <ol class="process">
+      <li><b>01</b><h3><span data-l="et">Taotlus</span><span data-l="en">Application</span></h3><p><span data-l="et">Viis lühikest sammu, umbes 3 minutit.</span><span data-l="en">Five short steps, about 3 minutes.</span></p></li>
+      <li><b>02</b><h3><span data-l="et">Vestlus meistriga</span><span data-l="en">A call with the master</span></h3><p><span data-l="et">Isiklik vastus ühe tööpäeva jooksul.</span><span data-l="en">A personal reply within one working day.</span></p></li>
+      <li><b>03</b><h3><span data-l="et">Objekti ülevaatus</span><span data-l="en">Site survey</span></h3><p><span data-l="et">Alus, mõõdud, materjalid ja joonised.</span><span data-l="en">Substrate, measurements, materials and drawings.</span></p></li>
+      <li><b>04</b><h3><span data-l="et">Kirjalik pakkumine</span><span data-l="en">Written proposal</span></h3><p><span data-l="et">Fikseeritud ulatus, investeering ja kuupäev kalendris.</span><span data-l="en">Fixed scope, investment and a date in the calendar.</span></p></li>
+      <li><b>05</b><h3><span data-l="et">Meistritöö</span><span data-l="en">The work</span></h3><p><span data-l="et">Nulljoone meetodi järgi, algusest üleandmiseni.</span><span data-l="en">Following the Zero Line Method, start to handover.</span></p></li>
+    </ol>
+    <div class="invest">
+      <div>
+        <h3><span data-l="et">Investeering</span><span data-l="en">Investment</span></h3>
+        <p><span data-l="et">Hinnakirja meil ei ole, sest kaks vannituba ei ole kunagi samad. Investeeringu paneme paika pärast ülevaatust, kirjalikult ja fikseeritult.</span><span data-l="en">There is no price list, because no two bathrooms are the same. The investment is set after the survey, in writing, and fixed.</span></p>
+      </div>
+      <div>
+        <h3><span data-l="et">Kalender</span><span data-l="en">Calendar</span></h3>
+        <p><span data-l="et">Kalender täitub tavaliselt 2–4 kuud ette. Kui teie ajaraam on kindel, taotlege varakult. Vahel vabaneb aeg ootamatult ning ootenimekirjas olijad kuulevad sellest esimesena.</span><span data-l="en">The calendar usually fills 2–4 months ahead. If your timeline is fixed, apply early. Openings sometimes appear unexpectedly, and people on the waiting list hear first.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="band deep on-deep" aria-labelledby="h-guar">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span data-l="et">Kindlus</span><span data-l="en">Assurance</span></p>
+      <h2 id="h-guar"><span data-l="et">Töö, mille eest meister seisab ka aastate pärast.</span><span data-l="en">Work the master stands behind, years later.</span></h2>
+    </div>
+    <div class="promises">
+      <div><b><span class="ph" data-cfg="guarantee">[X]</span> <span data-l="et">a</span><span data-l="en">yr</span></b><span data-l="et">kirjalik töögarantii</span><span data-l="en">written workmanship guarantee</span></div>
+      <div><b>12 <span data-l="et">kuud</span><span data-l="en">mo</span></b><span data-l="et">pärast valmimist tuleme üle vaatama</span><span data-l="en">inspection after completion</span></div>
+      <div><b>1</b><span data-l="et">tööpäev isikliku vastuseni</span><span data-l="en">working day to a personal reply</span></div>
+      <div><b>0</b><span data-l="et">alltöövõtjat teie pinnal</span><span data-l="en">subcontractors on your surface</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRADE -->
+<section class="band forest on-deep" aria-labelledby="h-trade">
+  <div class="wrap trade">
+    <div>
+      <p class="eyebrow"><span data-l="et">Arhitektidele ja sisekujundajatele</span><span data-l="en">For architects and interior designers</span></p>
+      <h2 id="h-trade" style="margin-top:18px"><span data-l="et">Teie joonis, ehitatud nii, nagu see on joonestatud.</span><span data-l="en">Your drawing, built exactly as drawn.</span></h2>
+      <p><span data-l="et">Loeme jooniseid, teeme lõikekaardi ja detaililahendused enne ehitust ning hoiame suhtluse otse teie ja meistri vahel.</span><span data-l="en">We read your drawings, prepare the cut map and detailing before construction, and keep communication direct between you and the master.</span></p>
+      <div class="hero-ctas"><a class="btn" href="#apply" data-role-pick="architect"><span data-l="et">Saada projekt</span><span data-l="en">Send a project</span><i class="arr"></i></a></div>
+    </div>
+    <ul>
+      <li><span data-l="et">Lõikekaart ja nulljoon enne ehitust</span><span data-l="en">Cut map and zero line before construction</span></li>
+      <li><span data-l="et">Detailid: nišid, servad, kaldega põrandad, trapid</span><span data-l="en">Details: niches, edges, falls, linear drains</span></li>
+      <li><span data-l="et">Materjalinõu ja näidised</span><span data-l="en">Material advice and sample panels</span></li>
+      <li><span data-l="et">Koostöö peatöövõtjaga</span><span data-l="en">Coordination with the main contractor</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="band" id="faq" aria-labelledby="h-faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">KKK · FAQ</p>
+      <h2 id="h-faq"><span data-l="et">Mida kliendid enne küsivad.</span><span data-l="en">Questions people ask first.</span></h2>
+    </div>
+    <div class="faq">
+      <details><summary><span data-l="et">Miks hinda veebilehel ei ole?</span><span data-l="en">Why is there no price on the website?</span></summary><div class="a"><span data-l="et">Sest hind sõltub alusest, materjalist ja detailidest, mida näeb alles objektil. Taotluses saate märkida eelarvevahemiku, et vestlus oleks kohe asjakohane.</span><span data-l="en">Because the price depends on the substrate, material and detailing, which can only be judged on site. In the application you can choose a budget band so the first conversation is relevant from the start.</span></div></details>
+      <details><summary><span data-l="et">Kui kaugele ette peab broneerima?</span><span data-l="en">How far ahead do I need to book?</span></summary><div class="a"><span data-l="et">Kalender on tavaliselt täis 2–4 kuud ette. Suuremate projektide puhul soovitame taotleda juba projekteerimise ajal.</span><span data-l="en">The calendar is usually booked 2–4 months ahead. For larger projects we recommend applying during the design stage.</span></div></details>
+      <details><summary><span data-l="et">Kas tööd teeb meister ise?</span><span data-l="en">Does the master do the work himself?</span></summary><div class="a"><span data-l="et">Jah. Iga plaadi laob <span class="ph" data-cfg="owner">[Meistri nimi]</span> isiklikult. Seepärast on kohti aastas piiratud arv.</span><span data-l="en">Yes. Every tile is set by <span class="ph" data-cfg="owner">[Master's name]</span> personally. That's why places each year are limited.</span></div></details>
+      <details><summary><span data-l="et">Kas töötate koos minu arhitekti ja peatöövõtjaga?</span><span data-l="en">Do you work with my architect and main contractor?</span></summary><div class="a"><span data-l="et">Jah, ja see on eelistatud viis. Lõikekaardi ja detailid kooskõlastame enne töö algust.</span><span data-l="en">Yes, and that's the preferred way. The cut map and details are agreed before work begins.</span></div></details>
+      <details><summary><span data-l="et">Kas materjali hankite teie või meie?</span><span data-l="en">Do you source materials, or do we?</span></summary><div class="a"><span data-l="et">Mõlemad sobivad. Kui materjali hangite ise, vaatame enne paigaldust üle partii, tooni ja kvaliteedi.</span><span data-l="en">Either works. If you source the material, we check batch, tone and quality before installation.</span></div></details>
+      <details><summary><span data-l="et">Kus te töötate?</span><span data-l="en">Where do you work?</span></summary><div class="a"><span data-l="et">Peamiselt <span class="ph" data-cfg="area">[piirkond]</span>. Erilisemate projektide puhul ka mujal Eestis ja välismaal.</span><span data-l="en">Mainly in <span class="ph" data-cfg="area">[region]</span>. For exceptional projects, elsewhere in Estonia and abroad.</span></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section class="band deep on-deep" id="apply" aria-labelledby="h-apply">
+  <div class="wrap apply">
+    <div class="apply-aside">
+      <p class="eyebrow"><span data-l="et">Taotlus</span><span data-l="en">Application</span></p>
+      <h2 id="h-apply"><span data-l="et">Taotle konsultatsiooni.</span><span data-l="en">Apply for a consultation.</span></h2>
+      <p><span data-l="et">Viis lühikest sammu. <span class="ph" data-cfg="owner">[Meistri nimi]</span> loeb iga taotluse ise ja vastab ühe tööpäeva jooksul.</span><span data-l="en">Five short steps. <span class="ph" data-cfg="owner">[Master's name]</span> reads every application himself and replies within one working day.</span></p>
+      <div class="assure">
+        <div><span data-l="et">Kalender on tavaliselt täis 2–4 kuud ette</span><span data-l="en">The calendar is usually booked 2–4 months ahead</span></div>
+        <div><span data-l="et">Vastus isiklikult meistrilt, mitte müügiosakonnast</span><span data-l="en">A reply from the master, not a sales team</span></div>
+        <div><span data-l="et">Teie andmeid ei jagata kellegagi</span><span data-l="en">Your details are never shared</span></div>
+      </div>
+    </div>
+
+    <form class="form" id="form" novalidate>
+      <div class="progress"><span class="mono" id="stepLabel">1 / 5</span><div class="bar"><i id="barFill" style="width:20%"></i></div></div>
+      <div class="steps">
+        <fieldset class="step" data-step="1">
+          <legend><span data-l="et">Kes te olete?</span><span data-l="en">Who are you?</span></legend>
+          <p class="hint"><span data-l="et">Nii teame, kuidas teiega kõige paremini rääkida.</span><span data-l="en">So we know how best to talk with you.</span></p>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="role" id="role-home" value="homeowner"><span><span data-l="et">Koduomanik</span><span data-l="en">Homeowner</span></span></label>
+            <label class="opt"><input type="radio" name="role" id="role-arch" value="architect"><span><span data-l="et">Arhitekt</span><span data-l="en">Architect</span></span></label>
+            <label class="opt"><input type="radio" name="role" id="role-design" value="designer"><span><span data-l="et">Sisekujundaja</span><span data-l="en">Interior designer</span></span></label>
+            <label class="opt"><input type="radio" name="role" id="role-dev" value="developer"><span><span data-l="et">Arendaja</span><span data-l="en">Developer</span></span></label>
+            <label class="opt"><input type="radio" name="role" id="role-gc" value="contractor"><span><span data-l="et">Peatöövõtja</span><span data-l="en">Main contractor</span></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="2" hidden>
+          <legend><span data-l="et">Mida soovite luua?</span><span data-l="en">What would you like to create?</span></legend>
+          <p class="hint"><span data-l="et">Valige kõik, mis sobivad.</span><span data-l="en">Choose all that apply.</span></p>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="type" id="t-bath" value="bathroom"><span><span data-l="et">Vannituba / märgruum</span><span data-l="en">Bathroom / wet room</span></span></label>
+            <label class="opt"><input type="checkbox" name="type" id="t-kitchen" value="kitchen"><span><span data-l="et">Köök</span><span data-l="en">Kitchen</span></span></label>
+            <label class="opt"><input type="checkbox" name="type" id="t-floor" value="floors"><span><span data-l="et">Põrandad</span><span data-l="en">Floors</span></span></label>
+            <label class="opt"><input type="checkbox" name="type" id="t-entry" value="entrance"><span><span data-l="et">Esik ja trepid</span><span data-l="en">Entrance and stairs</span></span></label>
+            <label class="opt"><input type="checkbox" name="type" id="t-mosaic" value="mosaic"><span><span data-l="et">Mosaiik / zellige</span><span data-l="en">Mosaic / zellige</span></span></label>
+            <label class="opt"><input type="checkbox" name="type" id="t-spa" value="spa"><span><span data-l="et">Saun, spaa, bassein</span><span data-l="en">Sauna, spa, pool</span></span></label>
+            <label class="opt"><input type="checkbox" name="type" id="t-house" value="house"><span><span data-l="et">Kogu maja</span><span data-l="en">Whole house</span></span></label>
+            <label class="opt"><input type="checkbox" name="type" id="t-com" value="commercial"><span><span data-l="et">Äri / hotell</span><span data-l="en">Commercial / hotel</span></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="3" hidden>
+          <legend><span data-l="et">Kus ja millal?</span><span data-l="en">Where and when?</span></legend>
+          <div class="field"><label for="f-loc"><span data-l="et">Objekti asukoht (linn või piirkond)</span><span data-l="en">Project location (city or region)</span></label><input id="f-loc" name="location" autocomplete="address-level2"></div>
+          <span class="sub-label"><span data-l="et">Projekti staadium</span><span data-l="en">Project stage</span></span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="stage" id="s-idea" value="idea"><span><span data-l="et">Idee</span><span data-l="en">Idea</span></span></label>
+            <label class="opt"><input type="radio" name="stage" id="s-design" value="design"><span><span data-l="et">Projekteerimine</span><span data-l="en">Design</span></span></label>
+            <label class="opt"><input type="radio" name="stage" id="s-build" value="build"><span><span data-l="et">Ehitus käib</span><span data-l="en">Under construction</span></span></label>
+            <label class="opt"><input type="radio" name="stage" id="s-ready" value="ready"><span><span data-l="et">Valmis plaatimiseks</span><span data-l="en">Ready for tiling</span></span></label>
+          </div>
+          <span class="sub-label"><span data-l="et">Soovitud algus</span><span data-l="en">Desired start</span></span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="start" id="w-1" value="lt3"><span><span data-l="et">Alla 3 kuu</span><span data-l="en">Within 3 months</span></span></label>
+            <label class="opt"><input type="radio" name="start" id="w-2" value="3-6"><span><span data-l="et">3–6 kuud</span><span data-l="en">3–6 months</span></span></label>
+            <label class="opt"><input type="radio" name="start" id="w-3" value="6-12"><span><span data-l="et">6–12 kuud</span><span data-l="en">6–12 months</span></span></label>
+            <label class="opt"><input type="radio" name="start" id="w-4" value="12+"><span><span data-l="et">Üle aasta</span><span data-l="en">Over a year</span></span></label>
+          </div>
+          <p class="note" id="soonNote" hidden><span data-l="et">Kalender on tavaliselt täis 2–4 kuud ette. Kirjutage siiski: vahel vabaneb aeg ja ootenimekirjas olijad kuulevad sellest esimesena.</span><span data-l="en">The calendar is usually booked 2–4 months ahead. Do write anyway: openings sometimes appear, and people on the waiting list hear first.</span></p>
+        </fieldset>
+
+        <fieldset class="step" data-step="4" hidden>
+          <legend><span data-l="et">Plaaditööde eelarve</span><span data-l="en">Budget for the tiling scope</span></legend>
+          <p class="hint"><span data-l="et">Ainult plaadi- ja kivitööde osa, koos materjaliga. See aitab vestluse kohe õigesse suunda viia.</span><span data-l="en">The tile and stone scope only, including materials. It helps take the first conversation in the right direction.</span></p>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="budget" id="b-1" value="b1"><span class="ph" data-cfg="band1">€8 000–15 000</span></label>
+            <label class="opt"><input type="radio" name="budget" id="b-2" value="b2"><span class="ph" data-cfg="band2">€15 000–30 000</span></label>
+            <label class="opt"><input type="radio" name="budget" id="b-3" value="b3"><span class="ph" data-cfg="band3">€30 000–60 000</span></label>
+            <label class="opt"><input type="radio" name="budget" id="b-4" value="b4"><span class="ph" data-cfg="band4">€60 000+</span></label>
+            <label class="opt"><input type="radio" name="budget" id="b-5" value="discuss"><span><span data-l="et">Soovin arutada</span><span data-l="en">I'd like to discuss</span></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="5" hidden>
+          <legend><span data-l="et">Rääkige projektist</span><span data-l="en">Tell us about the project</span></legend>
+          <div class="field"><label for="f-brief"><span data-l="et">Lühikirjeldus, materjalid, lingid joonistele või meeleolupiltidele</span><span data-l="en">A short brief, materials, links to drawings or mood boards</span></label><textarea id="f-brief" name="brief"></textarea></div>
+          <div class="two">
+            <div class="field"><label for="f-name"><span data-l="et">Nimi *</span><span data-l="en">Name *</span></label><input id="f-name" name="name" autocomplete="name"></div>
+            <div class="field"><label for="f-email"><span data-l="et">E-post *</span><span data-l="en">Email *</span></label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+            <div class="field"><label for="f-phone"><span data-l="et">Telefon</span><span data-l="en">Phone</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="f-arch"><span data-l="et">Arhitekt / sisekujundaja (kui on)</span><span data-l="en">Architect / designer (if any)</span></label><input id="f-arch" name="architect"></div>
+          </div>
+          <div class="field"><label for="f-src"><span data-l="et">Kuidas meist kuulsite?</span><span data-l="en">How did you hear about us?</span></label>
+            <select id="f-src" name="source">
+              <option value="">—</option>
+              <option value="referral" data-et="Soovitus" data-en="Referral">Soovitus</option>
+              <option value="architect" data-et="Arhitekt / sisekujundaja" data-en="Architect / designer">Arhitekt / sisekujundaja</option>
+              <option value="instagram" data-et="Instagram" data-en="Instagram">Instagram</option>
+              <option value="search" data-et="Google" data-en="Google">Google</option>
+              <option value="other" data-et="Muu" data-en="Other">Muu</option>
+            </select>
+          </div>
+          <label class="consent"><input type="checkbox" id="f-consent" name="consent"><span><span data-l="et">Nõustun, et minu andmeid kasutatakse ainult sellele taotlusele vastamiseks.</span><span data-l="en">I agree my details are used only to respond to this application.</span></span></label>
+        </fieldset>
+      </div>
+
+      <p class="err" id="err" role="alert"></p>
+      <div class="form-nav">
+        <button type="button" class="btn ghost" id="back" hidden><span data-l="et">Tagasi</span><span data-l="en">Back</span></button>
+        <span></span>
+        <button type="button" class="btn" id="next"><span data-l="et">Edasi</span><span data-l="en">Next</span><i class="arr"></i></button>
+        <button type="submit" class="btn" id="submit" hidden><span data-l="et">Saada taotlus</span><span data-l="en">Send application</span><i class="arr"></i></button>
+      </div>
+      <p class="privacy"><span data-l="et">Teie andmeid ei jagata. Vastus tuleb isiklikult meistrilt ühe tööpäeva jooksul.</span><span data-l="en">Your details are never shared. You'll get a personal reply from the master within one working day.</span></p>
+
+      <div class="done" aria-live="polite">
+        <p class="eyebrow"><span data-l="et">Taotlus vastu võetud</span><span data-l="en">Application received</span></p>
+        <h3><span data-l="et">Aitäh. Teie projekt on meistri laual.</span><span data-l="en">Thank you. Your project is on the master's desk.</span></h3>
+        <p><span data-l="et"><span class="ph" data-cfg="owner">[Meistri nimi]</span> loeb taotluse ise ja võtab teiega ühendust ühe tööpäeva jooksul, et leppida kokku lühike vestlus.</span><span data-l="en"><span class="ph" data-cfg="owner">[Master's name]</span> will read your application himself and contact you within one working day to arrange a short call.</span></p>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot on-deep">
+  <div class="wrap">
+    <p class="big"><span data-l="et">Pind, mis kestab põlvkondi.</span><span data-l="en">Surfaces set to outlast generations.</span></p>
+    <div class="foot-grid">
+      <div><b class="ph" data-cfg="brand">[Ettevõtte nimi]</b><span data-l="et">Kivi- ja plaaditööd tellimusel. <span class="ph" data-cfg="area">[piirkond]</span>, Eesti.</span><span data-l="en">Stone and tile by commission. <span class="ph" data-cfg="area">[region]</span>, Estonia.</span></div>
+      <div><b><span data-l="et">E-post</span><span data-l="en">Email</span></b><span class="copyable ph" data-cfg="email">[e-post]</span></div>
+      <div><b><span data-l="et">Telefon</span><span data-l="en">Phone</span></b><span class="copyable ph" data-cfg="phone">[telefon]</span></div>
+      <div><b>Instagram</b><span class="copyable ph" data-cfg="ig">[@konto]</span></div>
+    </div>
+    <p class="mono" style="margin-top:44px;opacity:.6">© 2026 · <span class="ph" data-cfg="company">[Äriregistri kood]</span></p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <small><span data-l="et">Kalender täis<br>2–4 kuud ette</span><span data-l="en">Booked<br>2–4 months ahead</span></small>
+  <a class="btn" href="#apply"><span data-l="et">Taotle konsultatsiooni</span><span data-l="en">Apply for a consultation</span></a>
+</div>
+
+<div class="draft-bar" id="draftBar">
+  <span><span data-l="et">Mustand: katkendjoonega kohad ootavad kliendi andmeid.</span><span data-l="en">Draft: dashed items await client details.</span></span>
+  <button type="button" id="draftToggle"><span data-l="et">Peida</span><span data-l="en">Hide</span></button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+"use strict";
+/* ============ CLIENT DETAILS (edit here) ============ */
+const CONFIG = {
+  brand:   {et:"[Ettevõtte nimi]", en:"[Studio name]"},
+  owner:   {et:"[Meistri nimi]",   en:"[Master's name]"},
+  years:   "[X]",
+  projects:"[X]",
+  sqm:     "[X] m²",
+  next:    {et:"[kuu aasta]", en:"[month year]"},
+  guarantee:"[X]",
+  area:    {et:"[piirkond]", en:"[region]"},
+  email:   "[e-post]",
+  phone:   {et:"[telefon]", en:"[phone]"},
+  ig:      "[@konto]",
+  company: {et:"[Äriregistri kood]", en:"[Company reg. no.]"},
+  band1:"€8 000–15 000", band2:"€15 000–30 000", band3:"€30 000–60 000", band4:"€60 000+"
+};
+
+const root = document.documentElement;
+root.classList.add("draft");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const hasGsap = !!(window.gsap && window.ScrollTrigger);
+const motion = hasGsap && !reduce;
+root.classList.add(motion ? "motion" : "static");
+
+/* ---------- language ---------- */
+let lang = "et";
+try{ const s = localStorage.getItem("tile-lang"); if(s==="en"||s==="et") lang=s; }catch(e){}
+function applyLang(l){
+  lang = l; root.dataset.lang = l; root.lang = l;
+  document.querySelectorAll("[data-set-lang]").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.setLang===l)));
+  document.querySelectorAll("[data-cfg]").forEach(el=>{
+    const v = CONFIG[el.dataset.cfg]; if(v==null) return;
+    el.textContent = typeof v === "string" ? v : v[l];
+  });
+  document.querySelectorAll("option[data-et]").forEach(o=>{ o.textContent = o.dataset[l]; });
+  try{ localStorage.setItem("tile-lang", l); }catch(e){}
+  if(window.ScrollTrigger) requestAnimationFrame(()=>ScrollTrigger.refresh());
+}
+document.querySelectorAll("[data-set-lang]").forEach(b=>b.addEventListener("click",()=>applyLang(b.dataset.setLang)));
+applyLang(lang);
+
+/* draft toggle */
+document.getElementById("draftToggle").addEventListener("click",()=>{
+  root.classList.remove("draft"); document.getElementById("draftBar").hidden = true;
+});
+
+/* ---------- procedural tiles ---------- */
+const PAL = {
+  forest:["#1f3a30","#21402f","#1c362c"],
+  deep:  ["#12251d","#10221b","#15291f"],
+  moss:  ["#355446","#3a5a4a","#304e41"],
+  sage:  ["#71897c","#7b9286","#6a8275"],
+  stone: ["#bcc1b6","#c3c7bc","#b4b9ad"],
+  marble:["#e7eae4","#eceee8","#e2e6df"],
+};
+function rng(seed){ let s = (seed*2654435761)%2147483647; if(s<=0) s+=2147483646; return ()=> (s = s*16807 % 2147483647) / 2147483647; }
+
+function makeTile(px, kind, seed){
+  const c = document.createElement("canvas"); c.width = c.height = Math.max(8, Math.round(px));
+  const g = c.getContext("2d"), S = c.width, r = rng(seed+7);
+  const base = PAL[kind][seed % PAL[kind].length];
+  g.fillStyle = base; g.fillRect(0,0,S,S);
+  const glossy = kind==="forest"||kind==="deep"||kind==="moss"||kind==="sage";
+  // glaze pooling (zellige-like unevenness)
+  const blot = glossy ? 10 : 6;
+  for(let i=0;i<blot;i++){
+    const x=r()*S, y=r()*S, rad=S*(.25+r()*.6);
+    const gr=g.createRadialGradient(x,y,0,x,y,rad);
+    const light = r()<.5;
+    gr.addColorStop(0, light ? `rgba(255,255,255,${glossy?.05+r()*.06:.04+r()*.05})` : `rgba(0,0,0,${glossy?.08+r()*.1:.03+r()*.04})`);
+    gr.addColorStop(1,"rgba(0,0,0,0)");
+    g.fillStyle=gr; g.fillRect(0,0,S,S);
+  }
+  if(kind==="marble" || kind==="stone"){
+    const veins = kind==="marble" ? 2+Math.floor(r()*3) : 1;
+    for(let v=0; v<veins; v++){
+      g.beginPath(); let x=-4, y=r()*S; g.moveTo(x,y);
+      while(x<S+4){ x+=S*(.08+r()*.1); y+=(r()-.5)*S*.22; g.lineTo(x,y); }
+      g.strokeStyle = kind==="marble" ? `rgba(90,110,98,${.18+r()*.25})` : `rgba(80,86,78,${.12+r()*.12})`;
+      g.lineWidth = .4 + r()*S*.012; g.stroke();
+      g.strokeStyle = `rgba(90,110,98,.06)`; g.lineWidth = S*.04; g.stroke();
+    }
+  }
+  // grain
+  const id=g.getImageData(0,0,S,S), d=id.data, amp = kind==="stone"?16:glossy?7:9;
+  for(let i=0;i<d.length;i+=4){ const n=(r()-.5)*amp; d[i]+=n; d[i+1]+=n; d[i+2]+=n; }
+  g.putImageData(id,0,0);
+  // glaze highlight + bevel
+  if(glossy){
+    const h=g.createLinearGradient(0,0,S,S*.6);
+    h.addColorStop(0,"rgba(255,255,255,.10)"); h.addColorStop(.4,"rgba(255,255,255,0)");
+    g.fillStyle=h; g.fillRect(0,0,S,S);
+  }
+  const b=g.createLinearGradient(0,0,S,S);
+  b.addColorStop(0,"rgba(255,255,255,.22)"); b.addColorStop(.07,"rgba(255,255,255,0)");
+  b.addColorStop(.93,"rgba(0,0,0,0)"); b.addColorStop(1,"rgba(0,0,0,.28)");
+  g.fillStyle=b; g.fillRect(0,0,S,S);
+  g.strokeStyle="rgba(0,0,0,.12)"; g.lineWidth=Math.max(1,S*.006); g.strokeRect(.5,.5,S-1,S-1);
+  return c;
+}
+const DPR = ()=> Math.min(window.devicePixelRatio||1, 2);
+
+/* ---------- hero specimen 3x3 ---------- */
+function drawSpecimen(){
+  const cv = document.getElementById("specimen"); if(!cv) return;
+  const w = cv.clientWidth || 400, dpr = DPR();
+  cv.width = cv.height = Math.round(w*dpr);
+  const g = cv.getContext("2d"); g.setTransform(dpr,0,0,dpr,0,0);
+  const gap = Math.max(2, w*.006), n=3, ts=(w-gap*(n-1))/n;
+  g.fillStyle="#d3d8ce"; g.fillRect(0,0,w,w);
+  const kinds=["marble","forest","marble","forest","deep","forest","marble","forest","marble"];
+  kinds.forEach((k,i)=>{ const t=makeTile(ts*dpr,k,i*13+3); g.drawImage(t,(i%n)*(ts+gap),Math.floor(i/n)*(ts+gap),ts,ts); });
+}
+
+/* ---------- pattern swatches ---------- */
+function drawPattern(cv, type, seed){
+  const w = cv.clientWidth, h = cv.clientHeight; if(!w||!h) return;
+  const dpr = DPR(); cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr);
+  const g = cv.getContext("2d"); g.setTransform(dpr,0,0,dpr,0,0);
+  const r = rng(seed||11);
+  if(type==="zellige"){
+    g.fillStyle="#cfd5cb"; g.fillRect(0,0,w,h);
+    const s = Math.max(18, w/11), gap=2;
+    const kinds=["forest","forest","moss","deep","forest","sage"];
+    let i=0;
+    for(let y=0;y<h;y+=s+gap) for(let x=0;x<w;x+=s+gap){
+      const k = kinds[Math.floor(r()*kinds.length)];
+      const jx=(r()-.5)*1.2, jy=(r()-.5)*1.2;
+      g.drawImage(makeTile(s*dpr,k,(i++)+seed), x+jx, y+jy, s, s);
+    }
+  } else if(type==="chevron"){
+    g.fillStyle="#d8dcd3"; g.fillRect(0,0,w,h);
+    const cw = Math.max(28, w/7), ph = cw*.5, gap=1.5;
+    const kinds=["stone","marble","stone","stone"];
+    let i=0;
+    for(let c=0; c*cw < w+cw; c++){
+      const dir = c%2 ? -1 : 1, x=c*cw;
+      for(let y=-cw*2; y<h+cw; y+=ph){
+        const k=kinds[Math.floor(r()*kinds.length)];
+        const tile=makeTile(64,k,(i++)+seed);
+        g.save(); g.beginPath();
+        const y0=y, y1=y+dir*cw*.5;
+        g.moveTo(x+gap/2,y0+gap/2); g.lineTo(x+cw-gap/2,y1+gap/2); g.lineTo(x+cw-gap/2,y1+ph-gap/2); g.lineTo(x+gap/2,y0+ph-gap/2); g.closePath(); g.clip();
+        g.drawImage(tile,x,Math.min(y0,y1),cw,ph+cw*.5);
+        g.restore();
+      }
+    }
+  } else if(type==="bookmatch"){
+    const hw=w/2, hh=h/2;
+    const q=document.createElement("canvas"); q.width=Math.round(hw*dpr); q.height=Math.round(hh*dpr);
+    const qg=q.getContext("2d"); qg.fillStyle="#e6e9e3"; qg.fillRect(0,0,q.width,q.height);
+    for(let v=0; v<7; v++){
+      qg.beginPath(); let x=r()*q.width*.3, y=-10; qg.moveTo(x,y);
+      while(y<q.height+10){ y+=q.height*(.05+r()*.06); x+=(r()-.35)*q.width*.12; qg.lineTo(x,y); }
+      qg.strokeStyle=`rgba(${v<2?"31,58,48":"110,128,118"},${.12+r()*.3})`; qg.lineWidth=.6+r()*dpr*2.6; qg.stroke();
+      qg.strokeStyle="rgba(110,128,118,.05)"; qg.lineWidth=dpr*18; qg.stroke();
+    }
+    const id=qg.getImageData(0,0,q.width,q.height), d=id.data;
+    for(let i=0;i<d.length;i+=4){ const n=(r()-.5)*8; d[i]+=n; d[i+1]+=n; d[i+2]+=n; }
+    qg.putImageData(id,0,0);
+    g.drawImage(q,0,0,hw,hh);
+    g.save(); g.translate(w,0); g.scale(-1,1); g.drawImage(q,0,0,hw,hh); g.restore();
+    g.save(); g.translate(0,h); g.scale(1,-1); g.drawImage(q,0,0,hw,hh); g.restore();
+    g.save(); g.translate(w,h); g.scale(-1,-1); g.drawImage(q,0,0,hw,hh); g.restore();
+    g.fillStyle="rgba(150,160,150,.55)"; g.fillRect(hw-.5,0,1,h); g.fillRect(0,hh-.5,w,1);
+  } else if(type==="hex"){
+    g.fillStyle="#d3d8ce"; g.fillRect(0,0,w,h);
+    const R=Math.max(7,w/30), hx=Math.sqrt(3)*R, cx=w/2, cy=h/2;
+    for(let row=-1; row*R*1.5<h+R*2; row++){
+      for(let col=-1; col*hx<w+hx; col++){
+        const x=col*hx+(row%2?hx/2:0), y=row*R*1.5;
+        const dist=Math.hypot(x-cx,y-cy)/(R*1.75);
+        const ring=Math.round(dist);
+        let col_;
+        if(ring===0) col_="#1f3a30";
+        else if(ring%5===0) col_="#1f3a30";
+        else if(ring%5===1 && Math.round(Math.atan2(y-cy,x-cx)*ring/1.05)%2===0) col_="#7b9286";
+        else col_ = r()<.12 ? "#dfe3dc" : "#eceee8";
+        g.beginPath();
+        for(let k=0;k<6;k++){ const a=Math.PI/6+k*Math.PI/3; const px=x+Math.cos(a)*(R-.9), py=y+Math.sin(a)*(R-.9); k?g.lineTo(px,py):g.moveTo(px,py); }
+        g.closePath(); g.fillStyle=col_; g.fill();
+        g.fillStyle="rgba(255,255,255,.10)"; g.beginPath(); g.arc(x-R*.25,y-R*.3,R*.45,0,Math.PI*2); g.fill();
+      }
+    }
+  }
+}
+function drawAllPatterns(){
+  document.querySelectorAll("[data-pattern]").forEach((el,i)=>{
+    const cv=el.querySelector("canvas"); if(cv) drawPattern(cv, el.dataset.pattern, 31+i*17);
+  });
+}
+
+/* ---------- cinematic assembly ---------- */
+const sec = document.getElementById("assemble");
+const cv = document.getElementById("mosaic");
+const ctx = cv.getContext("2d");
+const state = {fly:0, grout:0, sweep:0, open:0};
+let W=0,H=0,dpr=1,cols=0,rows=0,ts=0,gap=0,oy=0,tiles=[],sprites={},dirty=true;
+const clamp=(v,a=0,b=1)=>v<a?a:v>b?b:v;
+const easeOut=t=>t>=1?1:1-Math.pow(2,-10*t);
+const easeIO=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+
+function layout(){
+  W = sec.clientWidth; H = sec.clientHeight; dpr = DPR();
+  cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
+  cols = W<600 ? 9 : W<1000 ? 14 : 22;
+  gap = W<600 ? 2 : 3;
+  ts = (W - gap*(cols+1))/cols;
+  rows = Math.ceil((H - gap)/(ts+gap)) + 1;
+  oy = (H - (rows*(ts+gap)+gap))/2;
+  sprites = {};
+  Object.keys(PAL).forEach(k=>{ sprites[k]=[0,1,2].map(v=>makeTile(ts*dpr,k,v*31+k.length)); });
+  const ci=Math.floor(cols/2), ri=Math.floor(rows/2), cx=(cols-1)/2, cy=(rows-1)/2, maxD=Math.hypot(cx,cy);
+  const r = rng(99);
+  tiles = [];
+  for(let rr=0; rr<rows; rr++) for(let c=0; c<cols; c++){
+    const dx=c-ci, dy=rr-ri, dia=Math.abs(dx)+Math.abs(dy);
+    let kind;
+    if(dia%6===0) kind="marble";
+    else if(dia%6===3 && (dx+dy)%2===0) kind="sage";
+    else { const q=r(); kind = q<.52?"forest":q<.82?"deep":"moss"; }
+    const hx = gap + c*(ts+gap), hy = oy + gap + rr*(ts+gap);
+    const dn = Math.hypot(c-cx, rr-cy)/maxD;
+    const ang = Math.atan2(hy+ts/2-H/2, hx+ts/2-W/2);
+    const push = (0.35 + r()*.7) * Math.max(W,H) * .45;
+    const wx = cols<=9 ? 1.02 : .64, wy = cols<=9 ? .5 : .62;
+    const ex = Math.abs(c-cx)/(cols*.5*wx), ey = Math.abs(rr-cy)/(rows*.5*wy);
+    tiles.push({
+      hx, hy, dn, kind,
+      sp: sprites[kind][Math.floor(r()*3)],
+      sx: hx + Math.cos(ang)*push + (r()-.5)*ts*3,
+      sy: hy + Math.sin(ang)*push + (r()-.5)*ts*3,
+      z: 1.8 + r()*1.8,
+      rz: (r()-.5)*1.3, ry: (r()<.5?-1:1)*(Math.PI*.5+r()*.6),
+      delay: dn*.5 + r()*.08,
+      win: Math.hypot(ex,ey)
+    });
+  }
+  tiles.sort((a,b)=>a.delay-b.delay);
+  dirty = true;
+}
+
+function draw(){
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,W,H);
+  const push = 1 + easeIO(state.open)*.05;
+  ctx.translate(W/2,H/2); ctx.scale(push,push); ctx.translate(-W/2,-H/2);
+  // grout drawing into joints
+  if(state.grout>0){
+    const gp = easeIO(state.grout);
+    ctx.fillStyle = "#cdd3c8";
+    for(let c=0;c<=cols;c++){ const x=c*(ts+gap); const len=(H+40)*clamp(gp*1.5 - (c/cols)*.5); ctx.fillRect(x,-20,gap,len); }
+    for(let r=0;r<=rows;r++){ const y=oy+r*(ts+gap); const len=(W+40)*clamp(gp*1.5 - (r/rows)*.5); ctx.fillRect(-20,y,len,gap); }
+  }
+  // clear joints inside the opening window
+  if(state.open>0){
+    ctx.fillStyle="#0e1d17";
+    for(const t of tiles){ if(t.win>=1) continue; const o=easeIO(clamp((state.open*1.35 - t.win*.6)/.55)); if(o<=0) continue;
+      ctx.globalAlpha=o; ctx.fillRect(t.hx-gap, t.hy-gap, ts+gap*2, ts+gap*2); }
+    ctx.globalAlpha=1;
+  }
+  const band = -0.4*W + state.sweep*2.0*W;
+  for(const t of tiles){
+    const k = easeOut(clamp((state.fly - t.delay)/.42));
+    if(k<=0) continue;
+    let o = 0;
+    if(state.open>0 && t.win<1) o = easeIO(clamp((state.open*1.35 - t.win*.6)/.55));
+    if(o>=1) continue;
+    const x = t.sx + (t.hx - t.sx)*k, y = t.sy + (t.hy - t.sy)*k;
+    let s = t.z + (1 - t.z)*k;
+    if(k>.86 && k<1) s += Math.sin((k-.86)/.14*Math.PI)*.025;
+    const ry = t.ry*(1-k);
+    ctx.save();
+    ctx.translate(x+ts/2, y+ts/2);
+    ctx.rotate(t.rz*(1-k) + o*.35);
+    const so = s*(1-o*.55);
+    // cast shadow while airborne
+    const lift = s-1;
+    if(lift>.02){ ctx.fillStyle=`rgba(5,14,10,${Math.min(.35,lift*.3)})`; ctx.fillRect(-ts/2*so + lift*14, -ts/2*so + lift*20, ts*so, ts*so); }
+    ctx.scale(so*Math.cos(ry), so);
+    ctx.globalAlpha = Math.min(1, k*2.6) * (1-o);
+    ctx.drawImage(t.sp, -ts/2, -ts/2, ts, ts);
+    const shade = Math.abs(Math.sin(ry))*.55;
+    if(shade>.01){ ctx.fillStyle=`rgba(8,18,13,${shade})`; ctx.fillRect(-ts/2,-ts/2,ts,ts); }
+    if(state.sweep>0 && state.sweep<1 && k>=1){
+      const local = (t.hx + t.hy*.55) - band;
+      if(Math.abs(local) < ts*3){
+        const gr = ctx.createLinearGradient(-ts*1.5 - local, -ts/2, ts*1.5 - local, ts/2);
+        gr.addColorStop(.38,"rgba(255,255,255,0)"); gr.addColorStop(.5,"rgba(255,255,255,.42)"); gr.addColorStop(.62,"rgba(255,255,255,0)");
+        ctx.globalCompositeOperation="screen"; ctx.fillStyle=gr; ctx.fillRect(-ts/2,-ts/2,ts,ts);
+        ctx.globalCompositeOperation="source-over";
+      }
+    }
+    ctx.restore();
+  }
+  ctx.globalAlpha=1;
+}
+
+/* ---------- boot ---------- */
+function boot(){
+  drawSpecimen(); drawAllPatterns(); layout();
+  if(!motion){
+    state.fly=1; state.grout=1; state.sweep=0; state.open=1; draw();
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ignoreMobileResize:true});
+  let lenis=null;
+  if(window.Lenis){
+    try{
+      lenis = new Lenis({lerp:.09, smoothWheel:true});
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add(t=>lenis.raf(t*1000));
+      gsap.ticker.lagSmoothing(0);
+      document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{
+        const id=a.getAttribute("href"); if(id.length<2) return; const el=document.querySelector(id); if(!el) return;
+        e.preventDefault(); lenis.scrollTo(el,{offset:id==="#top"?0:-72,duration:1.6});
+      }));
+    }catch(e){ lenis=null; }
+  }
+  const tl = gsap.timeline({
+    scrollTrigger:{trigger:sec,start:"top top",end:()=>"+="+Math.round(innerHeight*(innerWidth<700?2.2:3)),pin:true,scrub:.9,anticipatePin:1,invalidateOnRefresh:true},
+    onUpdate:()=>{dirty=true;}
+  });
+  tl.to(state,{fly:1,duration:.5,ease:"none"},0)
+    .fromTo(".as-caption",{autoAlpha:0,y:16},{autoAlpha:1,y:0,duration:.08},.04)
+    .to(".as-caption",{autoAlpha:0,duration:.06},.46)
+    .to(sec,{backgroundColor:"#0e1d17",duration:.3,ease:"none"},.12)
+    .to(state,{grout:1,duration:.14,ease:"none"},.48)
+    .to(state,{sweep:1,duration:.14,ease:"none"},.6)
+    .to(state,{open:1,duration:.22,ease:"none"},.74)
+    .fromTo(".as-copy > *",{autoAlpha:0,y:36},{autoAlpha:1,y:0,stagger:.025,duration:.09,ease:"power2.out"},.86)
+    .to({}, {duration:.05});
+  gsap.ticker.add(()=>{ if(dirty){ draw(); dirty=false; } });
+
+  // hero drift
+  gsap.to(".rv-hero",{y:-80,autoAlpha:.15,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
+  // section reveals (transform-led; content stays readable)
+  gsap.utils.toArray(".sec-head, .compare, .stages .stage, .cards .card, .proj, .fit, .testi, .process li, .promises > div, .faq details").forEach(el=>{
+    gsap.from(el,{y:36,opacity:.2,duration:1.1,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 88%",once:true}});
+  });
+  window.__lenis = lenis;
+}
+
+/* header + sticky */
+const head=document.getElementById("head"), sticky=document.getElementById("sticky"), applySec=document.getElementById("apply");
+function onScroll(){
+  const y = window.scrollY;
+  head.classList.toggle("solid", y>40);
+  const ar = applySec.getBoundingClientRect();
+  sticky.classList.toggle("show", y > innerHeight*.9 && !(ar.top < innerHeight && ar.bottom > 0));
+}
+addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+let rt; addEventListener("resize",()=>{ clearTimeout(rt); rt=setTimeout(()=>{
+  drawSpecimen(); drawAllPatterns(); layout();
+  if(motion) ScrollTrigger.refresh(); else draw();
+},200); });
+
+/* ---------- application form ---------- */
+const form=document.getElementById("form"), steps=[...form.querySelectorAll(".step")];
+const back=document.getElementById("back"), next=document.getElementById("next"), submit=document.getElementById("submit");
+const err=document.getElementById("err"), fill=document.getElementById("barFill"), label=document.getElementById("stepLabel");
+let cur=0;
+const MSG={
+  role:{et:"Valige, kes te olete.",en:"Choose who you are."},
+  type:{et:"Valige vähemalt üks projektitüüp.",en:"Choose at least one project type."},
+  loc:{et:"Lisage objekti asukoht, valige staadium ja soovitud algus.",en:"Add the project location, and choose a stage and a start time."},
+  budget:{et:"Valige eelarvevahemik või „Soovin arutada”.",en:"Choose a budget band or \"I'd like to discuss\"."},
+  contact:{et:"Lisage nimi ja kehtiv e-posti aadress ning kinnitage nõusolek.",en:"Add your name and a valid email address, and tick the consent box."}
+};
+function valid(i){
+  const q=s=>form.querySelector(s);
+  if(i===0) return q('input[name=role]:checked')?"":"role";
+  if(i===1) return q('input[name=type]:checked')?"":"type";
+  if(i===2) return (q('#f-loc').value.trim() && q('input[name=stage]:checked') && q('input[name=start]:checked'))?"":"loc";
+  if(i===3) return q('input[name=budget]:checked')?"":"budget";
+  if(i===4){ const e=q('#f-email').value.trim(); return (q('#f-name').value.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) && q('#f-consent').checked)?"":"contact"; }
+  return "";
+}
+function show(i){
+  cur=i; steps.forEach((s,j)=>s.hidden=j!==i);
+  back.hidden = i===0; next.hidden = i===steps.length-1; submit.hidden = i!==steps.length-1;
+  fill.style.width = ((i+1)/steps.length*100)+"%"; label.textContent=(i+1)+" / "+steps.length;
+  err.textContent="";
+}
+next.addEventListener("click",()=>{ const v=valid(cur); if(v){ err.textContent=MSG[v][lang]; return; } show(cur+1); const f=steps[cur].querySelector("input,textarea"); if(f) f.focus({preventScroll:true}); });
+back.addEventListener("click",()=>show(cur-1));
+form.addEventListener("submit",e=>{
+  e.preventDefault(); const v=valid(cur); if(v){ err.textContent=MSG[v][lang]; return; }
+  // TODO (developer): send FormData(form) to the client's inbox / CRM here.
+  form.classList.add("sent");
+});
+form.addEventListener("change",e=>{
+  if(e.target.name==="start") document.getElementById("soonNote").hidden = e.target.value!=="lt3";
+  if(err.textContent && !valid(cur)) err.textContent="";
+});
+document.querySelectorAll("[data-role-pick]").forEach(a=>a.addEventListener("click",()=>{
+  const r=form.querySelector('input[name=role][value="'+a.dataset.rolePick+'"]'); if(r){ r.checked=true; show(0); }
+}));
+
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>{ if(motion) ScrollTrigger.refresh(); });
+boot();
+})();
+</script>
+
+</body>
+</html>
